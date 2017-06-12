@@ -23,8 +23,12 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include "rfw_random.h"
 using std::vector;
 typedef double EdgeCost;
-#define EDGE_COST_PRECISION 0.0000001
+//THE LINE BELOW WAS SET BY THOMAS
+#define EDGE_COST_PRECISION 0.0000001 
+//#define EDGE_COST_PRECISION 0.0001
 #define INFINITE_COST 1e32
+#define DEBUG_VERTEX -1
+
 
 class Coordinates {
 private:
@@ -570,9 +574,7 @@ public:
 		const bool verbose = false;
 		const int BUFSIZE = 65534; //1048574;
 		char buffer [BUFSIZE+2];
-		//int cost;
 		int n, m, t, tcount, ecount;
-		//double x, y;
 		t = n = m = -1;
 		tcount = ecount = 0;
 		int tdeclared = -1;
@@ -775,14 +777,14 @@ public:
 				ecount ++; 
 				if (SCALING_FACTOR != 1) cost = (cost + SCALING_FACTOR - 1) /SCALING_FACTOR;
 				if (cost == 0) {
-					if (zerocount == 0) fprintf (stderr, "Found zero edge!\n");
+					if (zerocount == 0) {
+						fprintf(stderr, "Found zero edge!\n");
+					}
 					zerocount ++;
 					cost = mincost;
 				}
 				const bool PERTURB = false;
-				if (PERTURB) {
-					cost -= 0.0001;
-				}
+				if (PERTURB) {cost -= 0.0001;}
 				AddEdge(v,w,(EdgeCost)cost);
 			} else if (READING_TERMINALS && sscanf (buffer, "T %d", &v)>0) {
 				if (verbose) fprintf (stderr, "%d is a terminal.\n", v); 

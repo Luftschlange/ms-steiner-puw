@@ -178,3 +178,21 @@ double RFWTimer::getElapsedTime() {
 }
 
 #endif
+
+
+/*************
+ *RFW_CHRONO
+ *************/
+
+#ifdef RFW_CHRONO
+
+void RFWTimer::init() {};
+
+void RFWTimer::startTiming() { start_time = std::chrono::high_resolution_clock::now(); }
+
+double RFWTimer::getElapsedTime() {
+	std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - start_time;
+	return elapsed.count();
+}
+
+#endif

@@ -17,6 +17,7 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include <cstdio>
 #include <cstdlib>
 #include "graph.h"
+#include <cmath>
 
 class GraphDrawer {
 private:

@@ -42,7 +42,8 @@ public:
 	int DEPTH_LIMIT;
 	string LOG_FILENAME;
 	double TIME_LIMIT; // the maximum time limit in seconds; 0 = none.
-
+	int RESILIENT_PERTURBATION; //0:off 1:on 2:auto (true if using perturbation)
+	
 	SteinerConfig () {
 		STRONG_BRANCHING = false;
 		FIRST_BRANCH = 1;
@@ -68,6 +69,7 @@ public:
 		DEPTH_LIMIT  = 0x7FFFFFFF;
 		LOG_FILENAME = "";
 		TIME_LIMIT = 0.0;
+		RESILIENT_PERTURBATION = 2; //auto
 	}
 
 	void Output (FILE *file) {
@@ -93,8 +95,9 @@ public:
 		fprintf (file, "maxcombfail %d\n", MAX_COMB_FAIL);
 		fprintf (file, "rootcompmode %d\n", ROOT_COMP_MODE);
 		fprintf (file, "depthlimit %d\n", DEPTH_LIMIT);
-		fprintf(file, "logfilename %s\n", LOG_FILENAME.c_str());
-		fprintf(file, "timelimit %f\n", TIME_LIMIT);
+		fprintf (file, "logfilename %s\n", LOG_FILENAME.c_str());
+		fprintf (file, "timelimit %f\n", TIME_LIMIT);
+		fprintf (file, "resilientperturbation %d\n", RESILIENT_PERTURBATION);
 	}
 
 	void ReadParameter (const char *key, const char *value) {
@@ -122,6 +125,7 @@ public:
 		if (strcmp(key,"-depthlimit")==0) {DEPTH_LIMIT = atoi(value);}
 		if (strcmp(key, "-logfilename") == 0) { LOG_FILENAME = value; }
 		if (strcmp(key, "-timelimit") == 0) { TIME_LIMIT = atof(value); }
+		if (strcmp(key, "-resilientperturbation")==0) {RESILIENT_PERTURBATION = atoi(value);}
 	}
 
 };

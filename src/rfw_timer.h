@@ -17,11 +17,11 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  *
  * RFWTimer
  * - measures running time in second
- * - supports three different facilities (clock, rusage, 
- *   and htime); define RFW_USAGE, RFW_CLOCK, RFW_HTIME, RFW_HRTIMER
+ * - supports four different facilities (clock, rusage, htime, hrtimer) 
+ * - define RFW_USAGE, RFW_CLOCK, RFW_HTIME, RFW_HRTIMER
  * - if none is the defined, a very crude heuristic is used
  *   to determine which one is to be used; don't rely on
- *   each to much
+ *   it too much
  **********************************************************/
 
 #pragma once
@@ -33,30 +33,24 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #ifndef RFW_CLOCK
 #ifndef RFW_HTIME
 #ifndef RFW_HRTIMER
+#ifndef RFW_STL
 
 #ifdef _MSC_VER
-	//#define RFW_CLOCK
 	#define RFW_HRTIMER
 #else 
-	#include <sys/time.h>
-//	#ifdef __GLIBC__
-		#define RFW_RUSAGE
-//	#else 
-//		#define RFW_HTIME
-//	#endif
+	#define RFW_CLOCK
 #endif
 
+#endif
 #endif
 #endif
 #endif 
 #endif
 
 #ifdef RFW_HRTIMER
-//namespace MustDie {
 	#include <Windows.h>
 	#undef min
 	#undef max
-//}
 #endif
 
 
@@ -72,6 +66,10 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #ifdef RFW_CLOCK
 #include <stdio.h>
 #include <time.h>
+#endif
+
+#ifdef RFW_STL
+#include <chrono>
 #endif
 
 //------------------
@@ -105,6 +103,11 @@ class RFWTimer {
 	#ifdef RFW_RUSAGE
 		struct rusage ru;
 		struct timeval start_time, end_time, sample_time;
+	#endif
+		
+	#ifdef RFW_CHRONO
+		// Wall clock
+		std::chrono::high_resolution_clock::time_point start_time;
 	#endif
 		
 		void setBaseTime (double bt); 

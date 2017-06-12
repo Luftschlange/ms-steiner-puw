@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 #include "rfw_random.h"
 
-const unsigned long int RFWRandom::maxvalue = (unsigned long int)(-1); 
+const unsigned long int RFWRandom::maxvalue = (unsigned long int)0xffffffff;// (unsigned long int)(-1);
 
 const unsigned long int RFWRandom::MATRIX_A = 0x9908b0dfUL;   /* constant vector a */
 const unsigned long int RFWRandom::UPPER_MASK = 0x80000000UL; /* most significant w-r bits */

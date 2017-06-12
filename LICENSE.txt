@@ -1,6 +1,6 @@
 Algorithm for Steiner Problem in Graphs
 
-Copyright (c) Microsoft Corporation
+Copyright (c) Microsoft Corporation, Thomas Pajor, Eduardo Uchoa, Renato F. Werneck
 
 All rights reserved. 
 

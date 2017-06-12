@@ -290,8 +290,9 @@ class RFWLocalRandom {
 
 
 		float GetFloat () {return (float)GetDouble();} //get a float number in [0;1]
-		double GetDouble() {return GetDoubleClosed();} //double in the range [0;1]
-		double GetDoubleClosed() {return ((double)GetRand()/(double)RFWRandom::maxvalue);}  //double in the range [0;1]
+		double GetDouble() { return GetDoubleClosed(); } //double in the range [0;1]
+		//double GetDouble() { double r = GetDoubleClosed(); fprintf(stderr, "<<< %.10f : %.10f : %d >>>", r, (double)RFWRandom::maxvalue, sizeof(RFWRandom::maxvalue));  return r; } //double in the range [0;1]
+		double GetDoubleClosed() { return ((double)GetRand() / (double)RFWRandom::maxvalue); }  //double in the range [0;1]
 		double GetDoubleOpen() {return ((double)GetRand()/((double)(RFWRandom::maxvalue)+1.0));} //double in the range [0;1)
 		bool GetBool () {return (GetRand() & 1);}
 

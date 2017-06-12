@@ -1,10 +1,10 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -O3 -fopenmp -DNDEBUG -ffunction-sections -fdata-sections
-LDFLAGS = -Wl,--gc-sections,--print-gc-sections
+CXXFLAGS = -std=c++11 -O3 -fopenmp -DNDEBUG
+LDFLAGS =
 BIN = ./bin
 SRC = ./src
 
-.phone: steiner
+.PHONY: steiner
 
 all: steiner
 
