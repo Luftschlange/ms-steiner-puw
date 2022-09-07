@@ -17,6 +17,7 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include "rfw_random.h"
 #include "spgconfig.h"
 #include <cstdio>
+#include <limits>
 
 class SolutionPool {
 private:
